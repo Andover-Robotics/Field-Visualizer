@@ -12,12 +12,13 @@ import javax.swing.ImageIcon;
  * A panel maintaining a picture of a Do Not Enter sign.
  */
 public class FieldVisualizer extends JPanel {
-    private static final long serialVersionUID = 7148504528835036003L;
+
     private static ImageIcon field = new ImageIcon("src/main/resources/images/field.jpeg");
+    //can replace field image for new game
     private int x = 212;
     private int y = 356;
-    public float x_translated = (float)(x - (field.getIconWidth() / 2)) / field.getIconWidth() * 144;
-    public float y_translated = (float)(y - (field.getIconHeight() / 2)) / field.getIconHeight() * 72;
+    private float x_translated = (float)(x - (field.getIconWidth() / 2)) / field.getIconWidth() * 144;
+    private float y_translated = (float)(y - (field.getIconHeight() / 2)) / field.getIconHeight() * 72;
     private Label label = new Label(location(x, y), Label.CENTER);
 
     /**
@@ -26,9 +27,11 @@ public class FieldVisualizer extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        //adds field image
         field.paintIcon(this, g, 0, 0);
-        this.add(label);
+        add(label);
 
+        //updates label
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -40,6 +43,7 @@ public class FieldVisualizer extends JPanel {
         });
     }
 
+    //translates pixel coordinates to Roadrunner coordinates
     public String location(int x, int y){
         x_translated = (float)(x - (field.getIconWidth() / 2)) / field.getIconWidth() * 144;
         y_translated = (float)(y - (field.getIconHeight() / 2)) / field.getIconHeight() * 72;
@@ -47,13 +51,9 @@ public class FieldVisualizer extends JPanel {
         return ( df.format(x_translated) + " , " + df.format(y_translated));
     }
 
-    /**
-     * A little driver in case you want a stand-alone application.
-     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             var panel = new FieldVisualizer();
-            //panel.setBackground(Color.GREEN.darker());
             var frame = new JFrame("Field Coordinate Visualizer");
             frame.setSize(field.getIconWidth(), field.getIconHeight());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
