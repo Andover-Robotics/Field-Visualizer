@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
  */
 public class FieldVisualizer extends JPanel {
 
-    private static final ImageIcon field = new ImageIcon("Field/src/main/resources/images/field.jpeg");
+    private static final ImageIcon field = new ImageIcon("Field/src/main/resources/images/field.png");
     //can replace field image for new game
     private int x = 212;
     private int y = 356;
